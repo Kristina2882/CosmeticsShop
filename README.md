@@ -21,4 +21,4 @@ Please make following replacements:
 [YOUR-PASSWORD-HERE] with your password
 [YOUR-DB-NAME] with the name of your database
 
-P.S. I will update the design of the application as soon as all planned functionality is implemented. Great thanks to PhotoPea for the templates I've used for creating pictures for the categories for the Home page:))
+P.S. I will update the design of the application as soon as all planned functionality is implemented. Great thanks to PhotoPea for the templates I've used for creating pictures for the categories for the Home page:)) Also thanks to all other sources I've taken pictures from. My project is for my personal learning ONLY and it will not be used for the commercial purposes.
