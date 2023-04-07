@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@model CosmeticsShop.ViewModels.ShopCartViewModel
+
+<div class="container">
+
+    @foreach(var cosmetic in Model.shopCart.listCartItems)
+    {
+        <div class="alert alert-warning mt-3">
+        <p>Cosmetic: @cosmetic.Cosmetic.Name</p>
+        <p>Price: @cosmetic.Cosmetic.Price.ToString()</p>
+        </div>
+    }
+    <a class="btn btn-danger" asp-controller ="Order" asp-action="CheckOut">To pay</a>
+</div>
+
+<h6>@Html.ActionLink("Back to shopping", "Index", "Home")</h6>

@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<h4>Authentication with Identity</h4>
+
+@if(User.Identity.IsAuthenticated)
+{
+    <h4>Hello @User.Identity.Name:))</h4>
+
+    @using (Html.BeginForm("Logout", "Account"))
+    {
+        <input type="submit" value="Log out"/>
+    }
+}
+
+else
+{
+<h6>@Html.ActionLink("Register", "Register")</h6>
+<h6>@Html.ActionLink("Log in", "Login")</h6>
+}
+
+<h6>@Html.ActionLink("Home", "Index", "Home")</h6>

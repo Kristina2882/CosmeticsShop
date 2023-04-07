@@ -1,0 +1,25 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@using CosmeticsShop.ViewModels
+@model CosmeticsShop.ViewModels.LoginViewModel
+
+@if (!ViewData.ModelState.IsValid)
+{
+    @Html.ValidationSummary("Please fix the following error(s) and resubmit the form")
+}
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Email)
+    @Html.TextBoxFor(model => model.Email)
+
+    @Html.LabelFor(model => model.Password)
+    @Html.EditorFor(model => model.Password)
+
+    <input type ="submit" value="Log in"/>
+}
+
+<h6>@Html.ActionLink("Register your account", "Register")</h6>
+<h6>@Html.ActionLink("To the accounts page", "Index")</h6>

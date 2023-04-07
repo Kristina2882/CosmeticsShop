@@ -1,0 +1,21 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@model CosmeticsShop.Models.Category
+
+<h4>Add new category</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.DisplayNameFor(model => model.Name)
+    @Html.TextBoxFor(model => model.Name)
+
+    @Html.DisplayNameFor(model => model.Image)
+    @Html.TextBoxFor(model => model.Image)
+
+
+        <input type ="submit" value="Save"/>
+}
+
+<h6>@Html.ActionLink("To the categories", "Index")</h6>

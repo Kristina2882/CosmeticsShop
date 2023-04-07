@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@using CosmeticsShop.Models
+
+<form asp-controller="Cosmetics" asp-action="Index">
+    <h6>
+        <input type="text" name="searchString" />
+        <input type="submit" value="Search!" />
+    </h6>
+</form>
+
+<div class="row mt-5 mb-2">
+@foreach (Cosmetic cosmetic in Model)
+{
+    <div class="col-md-3">
+        <img class=" img-thumbnail"  src="@cosmetic.Image">
+            <h4>@Html.ActionLink($"{cosmetic.Name}", "Details", new {id = cosmetic.CosmeticId}) </h4>
+            <h6>@cosmetic.Category.Name</h6>
+   
+    <h5>UAH @cosmetic.Price</h5>
+    </div>
+}
+</div>
+
+
+<h6>@Html.ActionLink("Home", "Index", "Home")</h6>
+@if (User.Identity.IsAuthenticated)
+{
+    <h6>@Html.ActionLink("Add new item", "Create")</h6>
+    <h6>@Html.ActionLink("To the categories", "Index", "Categories")</h6>
+}
+
+

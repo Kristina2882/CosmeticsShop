@@ -1,0 +1,31 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@model CosmeticsShop.Models.Category
+@using CosmeticsShop.Models
+
+<h4>@Model.Name</h4>
+@if (Model.Cosmetics.Count == 0)
+{
+    <h6>There are no any items in this category</h6>
+}
+<div class="row mt-5 mb-2">
+@foreach (Cosmetic cosmetic in Model.Cosmetics)
+{
+        <div class="col-md-3">
+        <img class=" img-thumbnail"  src="@cosmetic.Image">
+    <h5>@cosmetic.Name</h5>
+    <h6>@cosmetic.Price</h6>
+    <h6>@cosmetic.Description</h6>
+
+    <h6>@Html.ActionLink("Add to cart", "AddToCart", "ShopCart", new {id =cosmetic.CosmeticId})</h6>
+
+    </div>
+}
+</div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h6>@Html.ActionLink("To the categories", "Index")</h6>
+}

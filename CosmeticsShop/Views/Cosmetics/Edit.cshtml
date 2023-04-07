@@ -1,0 +1,25 @@
+﻿@{
+
+    Layout = "_Layout";
+}
+
+@model CosmeticsShop.Models.Cosmetic
+
+<h4>Edit this!</h4>
+
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.CosmeticId)
+    <h5>@Html.LabelFor(model => model.Name): @Html.EditorFor(model => model.Name)</h5>
+    <h5>@Html.LabelFor(model => model.Price): @Html.EditorFor(model => model.Price)</h5>
+    <h5>@Html.LabelFor(model => model.Description): @Html.EditorFor(model => model.Description)</h5>
+    <h5>@Html.LabelFor(model => model.Image): @Html.EditorFor(model => model.Image)</h5>
+
+    @Html.LabelFor(model => model.Category)
+    @Html.DropDownList("CategoryId")
+
+    <input type="submit" value="Save"/>
+
+    }
+
+<h6>@Html.ActionLink("See all cosmetics", "Index")</h6>

@@ -1,0 +1,14 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@model CosmeticsShop.Models.Cosmetic
+
+<h4>Do you really want to delete @Model.Name?</h4>
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Yes!" />
+}
+
+
+<h6>@Html.ActionLink("See all cosmetics", "Index")</h6>

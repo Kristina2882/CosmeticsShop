@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@using CosmeticsShop.Models
+
+<h2>Love Cosmetics</h2>
+<h4>Everything for your beauty!</h4>
+
+<h6>@Html.ActionLink("Explore all!", "Index", "Cosmetics")</h6>
+
+@if (Model["category"].Length == 0)
+{
+    <h5>We are adding goods to our shop. Please come back a bit later and find something nice for you:))</h5>
+}
+
+<div class="row mt-5 mb-2">
+@foreach (Category category in Model["category"])
+{
+    <div class="col-md-4">
+    <a href="/Categories/Details/@category.CategoryId"><img class=" img-thumbnail" src="@category.Image"></a>
+    </div>
+}
+</div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h6>@Html.ActionLink("To the categories", "Index", "Categories")</h6>
+    <h6>@Html.ActionLink("To the cart", "Index", "ShopCart")</h6>
+}

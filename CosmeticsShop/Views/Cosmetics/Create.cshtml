@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = "_Layout";
+    }
+
+
+@model CosmeticsShop.Models.Cosmetic
+<h4>Add a new item!</h4>
+
+
+@using (Html.BeginForm())
+{
+
+    <h5>
+
+    @Html.LabelFor(model=>model.Name)
+    @Html.TextBoxFor(model=> model.Name)
+    </h5>
+    <h5>
+    @Html.LabelFor(model=>model.Price)
+    @Html.TextBoxFor(model=> model.Price)
+
+    @Html.LabelFor(model=>model.Description)
+    @Html.TextBoxFor(model=> model.Description)
+
+        @Html.LabelFor(model=>model.Image)
+        @Html.TextBoxFor(model=> model.Image)
+
+
+        @Html.LabelFor(model => model.Category)
+        @Html.DropDownList("CategoryId")
+
+
+    <input type="submit" value="Add Cosmetic"/>
+    </h5>
+}
+
+<h6>@Html.ActionLink("See all cosmetics", "Index")</h6>

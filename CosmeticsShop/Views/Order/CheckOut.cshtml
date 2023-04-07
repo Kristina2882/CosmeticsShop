@@ -1,0 +1,56 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@model CosmeticsShop.Models.Order
+
+
+<div class="row">
+    <h4>Order Processing</h4>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <form asp-action="CheckOut" method="post" class="form-horizontal">
+            <div class="form-group">
+            <label asp-for="Name"></label>
+            <div class="col-md-5">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <label asp-for="SurName"></label>
+            <div class="col-md-5">
+                <input asp-for="SurName" class="form-control" />
+                <span asp-validation-for="SurName" class="text-danger"></span>
+            </div>
+
+            <label asp-for="Address"></label>
+            <div class="col-md-5">
+                <input readonly asp-for="Address" class="form-control" value="@User.Identity.Name" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <label asp-for="Phone"></label>
+            <div class="col-md-5">
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <input class="btn btn-success" type="submit" value="Create Order"/>
+
+        </div>
+    </form>
+
+    }
+    else
+    {
+        <h5>Please login or register before your order is processed!</h5>
+
+        <h6>@Html.ActionLink("Register", "Register", "Account")</h6>
+        <h6>@Html.ActionLink("Log in", "Login", "Account")</h6>
+    }
+
+</div>
+
+<h6>@Html.ActionLink("Home", "Index", "Home")</h6>
+
+
+
