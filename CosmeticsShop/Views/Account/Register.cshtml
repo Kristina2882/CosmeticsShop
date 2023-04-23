@@ -5,26 +5,34 @@
 @using CosmeticsShop.ViewModels
 @model RegisterViewModel
 
-<h4>Register a new user</h4>
-
+<div class="mt-3 mb-3 text-center">
 @if (!ViewData.ModelState.IsValid)
-{
-    @Html.ValidationSummary("Prease fix the following error(s) and resubmit a form")
-}
+    {
+        @Html.ValidationSummary("Prease fix the following error(s) and resubmit a form")
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post))
-{
-    @Html.LabelFor(user => user.Email)
-    @Html.TextBoxFor(user=> user.Email)
+    }
+</div>
 
-    @Html.LabelFor(user=> user.Password)
-    @Html.EditorFor(user=> user.Password)
 
-    @Html.LabelFor(user=> user.ConfirmPassword)
-    @Html.EditorFor(user=> user.ConfirmPassword)
+   <h4 class="text-center mb-3 mt-3">Registration</h4>
+   <div class="text-center">
+   <form method = "post" asp-controller="Account" asp-action="Register">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="mb-3">
+        <input asp-for="Email" placeholder="Your email" /> <br/>
+    </div>
+    <div class="mb-3">
+        <input asp-for="Password" placeholder="Your password" /> <br/>
+    </div>
+        <div class="mb-3">
+            <input asp-for="ConfirmPassword" placeholder="Confirm your password" /> <br/>
+        </div>
 
-    <input type="submit" value="Register"/>
+    <div class="mt-3">
+        <input type = "submit" class="buttonsmall" value="Register" />
+    </div>
+</form>
+</div>
 
-}
 
-<h6>@Html.ActionLink("Back to the accounts page", "Index")</h6>
+

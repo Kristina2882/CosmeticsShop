@@ -5,18 +5,29 @@
 @using CosmeticsShop.Models
 @model CosmeticsShop.Models.Cosmetic
 
-<h4>Cosmetic details</h4>
 
+<div class="mb-3 mt-3 col-md-3">
+<img class=" img-thumbnail" src="@Model.Image">
 <h4>@Html.DisplayFor(model => model.Name)</h4>
 <h5>@Html.DisplayFor(model => model.Category.Name)</h5>
 <h6>@Html.DisplayNameFor(model=> model.Price): @Html.DisplayFor(model => model.Price)</h6>
 <h6>@Html.DisplayNameFor(model=> model.Description): @Html.DisplayFor(model => model.Description)</h6>
 
-<h6>@Html.ActionLink("Add to cart", "AddToCart", "ShopCart", new {id =Model.CosmeticId})</h6>
+<a class="buttonsmall" asp-controller="ShopCart" asp-action="AddToCart" asp-route-id="@Model.CosmeticId">Add to cart</a>
+</div>
 
-@if (User.Identity.IsAuthenticated)
+<div class="mt-3">
+<a class="btn btn-outline-secondary" style="border-radius:10px" asp-controller="Cosmetics" asp-action="Index">See all cosmetics</a>
+<a class="btn btn-outline-secondary" style="border-radius:10px" asp-controller="Home" asp-action="Index">Home</a>
+</div>
+
+
+@if (User.IsInRole("Admin"))
 {
-<h6>@Html.ActionLink("Edit this", "Edit", new {id = Model.CosmeticId})</h6>
-<h6>@Html.ActionLink("Delete this", "Delete", new {id = Model.CosmeticId})</h6>
+    <div class="mt-3">
+        <h6 class="mb-3"><strong>For administrator</strong></h6>
+        <h6 class="mb-3">@Html.ActionLink("Edit this", "Edit", new {id = Model.CosmeticId})</h6>
+        <h6 class="mb-3">@Html.ActionLink("Delete this", "Delete", new {id = Model.CosmeticId})</h6>
+    </div>
+
 }
-<h6>@Html.ActionLink("See all the cosmetics", "Index")</h6>

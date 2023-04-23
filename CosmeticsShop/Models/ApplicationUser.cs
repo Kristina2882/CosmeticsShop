@@ -4,5 +4,6 @@ namespace CosmeticsShop.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        
     }
 }

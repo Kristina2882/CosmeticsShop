@@ -15,30 +15,31 @@ namespace CosmeticsShop.Controllers
         {
             _db = db;   
         }
-
-        public IActionResult Index(string searchString)
+        
+        public async Task<ActionResult> Index(string searchString)
         {
-            List<Cosmetic> cosmetics = _db.Cosmetics
+            List<Cosmetic> cosmetics = await _db.Cosmetics
                 .Include(c => c.Category)
-                .ToList();
+                .ToListAsync(); 
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                cosmetics = cosmetics
-                    .Where(c => c.Name!.Contains(searchString))
-                    .ToList();
+                var filtered = cosmetics.Where(c => c.Name.Contains(searchString));
+                return View(filtered.ToList());
             }
+
             return View(cosmetics);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
+
         [HttpGet]
         public IActionResult Create()
         {
             ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
             return View();
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Create(Cosmetic cosmetic)
         {
@@ -55,7 +56,7 @@ namespace CosmeticsShop.Controllers
             return View(thisCosmetic);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int id)
         {
             Cosmetic thisCosmetic = _db.Cosmetics.FirstOrDefault(cosmetic => cosmetic.CosmeticId == id);
@@ -63,7 +64,7 @@ namespace CosmeticsShop.Controllers
             return View(thisCosmetic);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Edit(Cosmetic cosmetic)
         {
@@ -72,21 +73,28 @@ namespace CosmeticsShop.Controllers
             return RedirectToAction("Index");   
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             Cosmetic thisCosmetic = _db.Cosmetics.FirstOrDefault(cosmetic => cosmetic.CosmeticId == id);
             return View(thisCosmetic);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
             Cosmetic thisCosmetic = _db.Cosmetics.FirstOrDefault(cosmetic => cosmetic.CosmeticId == id);
-            _db.Cosmetics.Remove(thisCosmetic);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
+            if (thisCosmetic != null)
+            {
+                _db.Cosmetics.Remove(thisCosmetic);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return NotFound();  
+            }
         }
     }
 }

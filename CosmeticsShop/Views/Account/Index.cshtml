@@ -2,22 +2,31 @@
     Layout = "_Layout";
 }
 
-<h4>Authentication with Identity</h4>
+@model CosmeticsShop.Models.ApplicationUser
+
+<h4 class=" text-center mb-3 mt-3">Welcome to Love Cosmetics♡</h4>
 
 @if(User.Identity.IsAuthenticated)
 {
-    <h4>Hello @User.Identity.Name:))</h4>
+    <div class=" text-center mb-3 mt-3">
+        <h5 class=" text-center mb-3 mt-3">Hello @User.Identity.Name:)) </h5>
 
     @using (Html.BeginForm("Logout", "Account"))
     {
-        <input type="submit" value="Log out"/>
+        <input type="submit" class="buttonsmall" value="Log out"/>
     }
+    </div>
 }
 
 else
 {
-<h6>@Html.ActionLink("Register", "Register")</h6>
-<h6>@Html.ActionLink("Log in", "Login")</h6>
+    <div class="mb-3 mt-3 text-center">
+        <h5 class=" text-center mb-3 mt-3">Please log in or register!</h5>
+        <a class="buttonsmall" asp-controller="Account" asp-action="Register">Register</a>
+        <a class="buttonsmall" asp-controller="Account" asp-action="Login">Log in</a>
+    </div>
 }
 
-<h6>@Html.ActionLink("Home", "Index", "Home")</h6>
+<div class="mt-3">
+    <a class="btn btn-outline-secondary" style="border-radius:10px" asp-controller="Home" asp-action="Index">Home</a>
+</div>

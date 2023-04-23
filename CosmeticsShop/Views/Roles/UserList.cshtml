@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@model IEnumerable<CosmeticsShop.Models.ApplicationUser>
+
+
+    <h4 class="mb-3 mt-3">List of users</h4>
+
+    @foreach (var user in Model)
+    {
+    <h6 class="mb-3">@user.UserName | <a class="buttonsmall" asp-action="Edit" asp-route-userid="@user.Id">Access permissions</a> </h6>
+        
+    }
+
+    <h6 class="mt-3">@Html.ActionLink("Back to roles", "Index")</h6>

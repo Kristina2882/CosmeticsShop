@@ -2,6 +2,8 @@
     Layout = "_Layout";
 }
 
-<h4>Please add some items to your cart!</h4>
+<h4 class="text-center mb-3 mt-3">Please add some items to your cart!</h4>
 
-<h6>@Html.ActionLink("Back to shopping", "Index", "Cosmetics")</h6>
+<div class="mt-3">
+    <a class="btn btn-outline-secondary" style="border-radius:10px" asp-controller="Cosmetics" asp-action="Index">Back to shopping</a>
+</div>

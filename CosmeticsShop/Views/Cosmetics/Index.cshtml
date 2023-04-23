@@ -3,33 +3,33 @@
 }
 
 @using CosmeticsShop.Models
+@model List<CosmeticsShop.Models.Cosmetic>
 
-<form asp-controller="Cosmetics" asp-action="Index">
-    <h6>
-        <input type="text" name="searchString" />
-        <input type="submit" value="Search!" />
-    </h6>
-</form>
 
-<div class="row mt-5 mb-2">
+<div class="row mt-3 mb-3">
 @foreach (Cosmetic cosmetic in Model)
 {
     <div class="col-md-3">
         <img class=" img-thumbnail"  src="@cosmetic.Image">
             <h4>@Html.ActionLink($"{cosmetic.Name}", "Details", new {id = cosmetic.CosmeticId}) </h4>
-            <h6>@cosmetic.Category.Name</h6>
-   
+           <h6>@cosmetic.Category.Name</h6>
+            
     <h5>UAH @cosmetic.Price</h5>
-    </div>
+    <a class="buttonsmall" asp-controller="ShopCart" asp-action="AddToCart" asp-route-id="@cosmetic.CosmeticId">Add to cart</a>
+     </div>
 }
+
 </div>
 
+<a class="btn btn-outline-secondary" style="border-radius:10px" asp-controller="Home" asp-action="Index">Home</a>
 
-<h6>@Html.ActionLink("Home", "Index", "Home")</h6>
-@if (User.Identity.IsAuthenticated)
+@if (User.IsInRole("Admin"))
 {
-    <h6>@Html.ActionLink("Add new item", "Create")</h6>
-    <h6>@Html.ActionLink("To the categories", "Index", "Categories")</h6>
+    <div class="mt-3">
+        <h6 class="mb-3"><strong>For administrator</strong></h6>
+    <h6 class="mb-3">@Html.ActionLink("Add new item", "Create")</h6>
+    <h6 class="mb-3">@Html.ActionLink("To the categories", "Index", "Categories")</h6>
+    </div>
 }
 
 

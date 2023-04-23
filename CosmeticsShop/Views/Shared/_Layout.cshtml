@@ -1,5 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,38 +9,114 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CosmeticsShop.styles.css" asp-append-version="true" />
+    <style>
+        .button {
+            background-color: #f34984;
+            border: none;
+            border-radius: 15px;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            font-size: 20px;
+            text-decoration: none;
+            margin: 4px 2px;
+            opacity: 0.6;
+            transition: 0.3s;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .buttonsmall {
+            background-color: #f34984;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 14px;
+            text-decoration: none;
+            margin: 4px 2px;
+            opacity: 0.6;
+            transition: 0.3s;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+            .button:hover {
+                opacity: 1;
+                color:white;
+                text-decoration:none;
+                font-size: 20px;
+                border-radius: 15px;
+            }
+
+            .buttonsmall:hover{
+            opacity: 1;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            border-radius: 10px;
+            }
+
+    </style>
+
 </head>
-<body>
+<body style="background-color:#fdf1f4">
+
+    
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Love Cosmetics</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+        <nav class="navbar navbar-expand-sm border-bottom box-shadow mb-3 navbar-light" style="background-color:#92cbdf;">
+                
+                    <div class="container-fluid">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="/img/6334493_circle_doodle_favorite_heart_like_icon.png" alt="" width="35" height="35">
+                    Love Cosmetics
+                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link active" aria-current="page" asp-controller="Home" asp-action="Index">Home</a>
+                         </li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                           <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
                         </li>
+                        <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="UserList">User Access</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Categories </a>
+                        </li>
+                    }
+                  
                         @if(User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item">
+                                <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Index">Log out</a>
-                            </li>
+                                </li>
                         }
                         else
                         {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
-                        </li>
+                            </li>
                         }
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ShopCart" asp-action="Index">Your cart</a>
+                    <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="ShopCart" asp-action="Index">Your cart </a>
                         </li>
-                    </ul>
-                </div>
+                       
+                  </ul>
+                    <span class="navbar-text">
+                        <h5> ... you are beautiful ♡</h5>
+                    </span>
+               </div>
             </div>
         </nav>
     </header>
@@ -50,7 +128,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - CosmeticsShop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - Love Cosmetics
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

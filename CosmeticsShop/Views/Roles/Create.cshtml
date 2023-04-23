@@ -1,0 +1,18 @@
+﻿@{
+    Layout = "_Layout";
+}
+@model Microsoft.AspNetCore.Identity.IdentityRole
+
+<h4 class="mb-3 mt-3">Add new role</h4>
+@using (Html.BeginForm())
+{
+    <div class="mt-3 mb-3">
+    @Html.LabelFor(model=> model.Name)
+    @Html.TextBoxFor(model => model.Name)
+    </div>
+    <div class="mb-3 mt-3">
+    <input type="submit" class="buttonsmall" value="Save"/>
+    </div>
+}
+
+<h6 class="mt-3">@Html.ActionLink("Back to roles", "Index")</h6>

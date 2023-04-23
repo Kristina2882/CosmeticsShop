@@ -23,6 +23,7 @@ builder.Services.AddMemoryCache();
 builder.Services.AddSession();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+          .AddRoles<IdentityRole>()
           .AddEntityFrameworkStores<CosmeticsShopContext>()
           .AddDefaultTokenProviders();
 
@@ -49,6 +50,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseSession();
+
 
 app.UseRouting();
 

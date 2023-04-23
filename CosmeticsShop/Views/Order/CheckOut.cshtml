@@ -4,37 +4,32 @@
 
 @model CosmeticsShop.Models.Order
 
+<h4 class="text-center mb-3 mt-3">Order Processing</h4>
 
-<div class="row">
-    <h4>Order Processing</h4>
+<div class="text-center mb-3 mt-3">
+    
     @if (User.Identity.IsAuthenticated)
     {
         <form asp-action="CheckOut" method="post" class="form-horizontal">
             <div class="form-group">
-            <label asp-for="Name"></label>
-            <div class="col-md-5">
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-
-            <label asp-for="SurName"></label>
-            <div class="col-md-5">
-                <input asp-for="SurName" class="form-control" />
-                <span asp-validation-for="SurName" class="text-danger"></span>
-            </div>
-
-            <label asp-for="Address"></label>
-            <div class="col-md-5">
-                <input readonly asp-for="Address" class="form-control" value="@User.Identity.Name" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-
-            <label asp-for="Phone"></label>
-            <div class="col-md-5">
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
-            <input class="btn btn-success" type="submit" value="Create Order"/>
+                <div class="mb-3">
+                    <input asp-for="Name" placeholder="Your name" /> <br/>
+                    <span asp-validation-for="Name"></span>
+                </div>
+                <div class="mb-3">
+                    <input asp-for="SurName" placeholder="Your surname" /><br/>
+                    <span asp-validation-for="SurName"></span>
+                </div>
+                <div class="mb-3">
+                    <input asp-for="Address" readonly value="@User.Identity.Name" /><br/>
+                    <span asp-validation-for="Address"></span>
+                </div>
+                <div class="mb-3">
+                    <input asp-for="Phone" placeholder="Your phone" /><br/>
+                    <span asp-validation-for="Phone"></span>
+                </div>
+ 
+            <input class="buttonsmall" type="submit" value="Create Order"/>
 
         </div>
     </form>
@@ -42,15 +37,19 @@
     }
     else
     {
-        <h5>Please login or register before your order is processed!</h5>
-
-        <h6>@Html.ActionLink("Register", "Register", "Account")</h6>
-        <h6>@Html.ActionLink("Log in", "Login", "Account")</h6>
+        
+        <div class="mt-3 mb-3 text-center">
+            <h5 class="mb-3">Please login or register before your order is processed!</h5>
+        <a class="buttonsmall" asp-controller="Account" asp-action="Register">Register</a>
+        <a class="buttonsmall" asp-controller="Account" asp-action="Login">Log in</a>
+        </div>
     }
 
 </div>
 
-<h6>@Html.ActionLink("Home", "Index", "Home")</h6>
+<div class="mt-3">
+    <a class="btn btn-outline-secondary" style="border-radius:10px" asp-controller="Home" asp-action="Index">Home</a>
+</div>
 
 
 

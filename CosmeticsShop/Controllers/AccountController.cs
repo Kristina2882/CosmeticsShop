@@ -2,6 +2,7 @@
 using CosmeticsShop.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CosmeticsShop.Controllers
 {
@@ -10,12 +11,15 @@ namespace CosmeticsShop.Controllers
         private readonly CosmeticsShopContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-
-        public AccountController(CosmeticsShopContext db, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+       private readonly RoleManager<IdentityRole> _roleManager;
+        
+        public AccountController(CosmeticsShopContext db, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager) 
         {
             _db = db;
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager; 
+           
         }
 
         public ActionResult Index()
@@ -41,6 +45,13 @@ namespace CosmeticsShop.Controllers
                 IdentityResult result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var defaultrole = _roleManager.FindByNameAsync("Buyer").Result;
+
+                    if (defaultrole != null)
+                    {
+                        IdentityResult roleresult = await _userManager.AddToRoleAsync(user, defaultrole.Name);
+                    }
+
                     return RedirectToAction("Index");
                 }
 
@@ -55,30 +66,32 @@ namespace CosmeticsShop.Controllers
             }
         }
 
-        public ActionResult Login()
+        [HttpGet]
+        public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Login(LoginViewModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (!ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
-                return View(model);
-            }
-
-            else
-            {
-                Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent:true, lockoutOnFailure:false);
-                if (result.Succeeded) 
+               
+                var result =
+                    await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent:true, lockoutOnFailure:false);
+                if (result.Succeeded)
                 {
-                    return RedirectToAction("Index");
-                }
 
-                ModelState.AddModelError("", "There is something wrong with your email or password. Please try again!");
-                return View(model);
+                        return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "There is somrthing wrong with your email and/ or password");
+                }
             }
+            return View(model);
         }
 
         [HttpPost]

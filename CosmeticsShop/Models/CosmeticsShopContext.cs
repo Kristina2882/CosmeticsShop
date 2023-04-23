@@ -11,6 +11,7 @@ namespace CosmeticsShop.Models
         public DbSet<OrderDetail> OrderDetails { get; set; }    
 
         public DbSet<Category> Categories { get; set; } 
+        
 
         public CosmeticsShopContext(DbContextOptions options) : base(options) { }
     }

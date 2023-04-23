@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CosmeticsShop.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class CategoriesController : Controller
     {
         private readonly CosmeticsShopContext _db;
@@ -17,8 +17,8 @@ namespace CosmeticsShop.Controllers
 
         public IActionResult Index()
         {
-            List<Category> model = _db.Categories.ToList();
-            return View(model);
+            List<Category> categories  = _db.Categories.ToList();
+            return View(categories);
         }
 
         public IActionResult Create()
